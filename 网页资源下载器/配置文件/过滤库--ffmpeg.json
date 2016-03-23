@@ -1,7 +1,7 @@
 {
 "DownLoadInfo":{//获得当前网页的指定下载地址
         "SaveDisk":false,//是否保存当前网页信息到磁盘上
-        "ParentNodeInfo" ://章节目录共同的父标签的信息，包含标签名和标签属性
+        "ParentNodeInfo" ://网络资源共同的父标签的信息，包含标签名和标签属性
         {
             "TagName" : "table",
              "PropInfo" :         
@@ -10,7 +10,7 @@
                      ["id","external-libs-table"]
              ]
         },
-        "SubNodeInfo" ://逐条章节链接所在标签的信息，包含标签名和标签属性
+        "SubNodeInfo" ://逐条下载链接所在标签的信息，包含标签名和标签属性
         {
             "TagName" : "a",
             "PropName" : "href"
@@ -19,7 +19,7 @@
         "IsDownload":true//下载链接里的文件扩展名
         
 },
-"MatchURL":{//章节链接和章节链接所在链接的匹配模式
+"MatchURL":{//当前网页地址与下载链接地址的字符串并接模式
         "MatchMode":4,//设置url匹配模式
         "nMoveUnit" :2, //移动nMoveUnit个单位，仅当MatchMode为1或4时有效
         "IsShowData" :true //是否在控制台上显示真正的下载地址
