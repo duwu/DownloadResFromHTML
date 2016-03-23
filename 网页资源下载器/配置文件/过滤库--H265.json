@@ -1,0 +1,32 @@
+{
+"DownLoadInfo":{//获得当前网页的指定下载地址
+        "SaveDisk":false,//是否保存当前网页信息到磁盘上
+        "ParentNodeInfo" ://章节目录共同的父标签的信息，包含标签名和标签属性
+        {
+            "TagName" : "table",
+             "PropInfo" :         
+            [
+                     ["class","aui aui-table-interactive bb-list"],
+                     ["id","uploaded-files"]
+             ]
+        },
+        "SubNodeInfo" ://逐条章节链接所在标签的信息，包含标签名和标签属性
+        {
+            "TagName" : "a",
+            "PropName" : "href",
+            "PropInfo" :         
+            [
+                     ["class","execute"]
+             ]
+        },
+        
+        "FileExtensionName":"tar.gz",//下载链接里的文件扩展名
+        "IsDownload":true//下载链接里的文件扩展名
+        
+},
+"MatchURL":{//章节链接和章节链接所在链接的匹配模式
+        "MatchMode":4,//设置url匹配模式
+        "nMoveUnit" :29, //移动nMoveUnit个单位，仅当MatchMode为1或4时有效
+        "IsShowData" :true //是否在控制台上显示真正的下载地址
+}
+}

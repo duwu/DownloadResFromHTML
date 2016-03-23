@@ -17,11 +17,6 @@
 using namespace std;
 using namespace htmlcxx;
 
-//开启下载功能的宏
-#define OPENDOWNLOAD
-
-
-
 struct NodeType{//此结构体存放了一个标签节点的所有属性
 	string TagName;//当前节点所在的标签名
 	string PropName;//需要获取数值的属性名
@@ -57,26 +52,30 @@ struct NodeType{//此结构体存放了一个标签节点的所有属性
 //初始化节点属性里的所有信息
 int JsonValue2NodeType(Json::Value NodeJson, NodeType &TempNode);
 
-void LoadFileFromURL(string DownloadURL, bool IsShowData)
+void LoadFileFromURL(string DownloadURL, bool IsDownload, bool IsShowData)
 {
 	if (IsShowData)
 		cout << "当前正在下载：" << DownloadURL << "对应的文件" << endl;
-
-	string FilePath = DownloadURL.substr(DownloadURL.rfind("/") + 1);
-	if (!PathFileExistsA(FilePath.c_str()))
+	if (IsDownload)
 	{
-		cout << FilePath << "不存在，即将下载……" << endl;
-#ifdef OPENDOWNLOAD
-		//cout << "开启了下载功能哦" << endl;
-		//使用COM来下载，无需自己写，不过有弊端，不能实时查看下载进度，建议使用libcurl来改进下载
-		::CoInitialize(NULL);
-		::URLDownloadToFileA(NULL, DownloadURL.c_str(), FilePath.c_str(), 0, NULL);
-		::CoUninitialize();
-#endif
-		cout << FilePath << "下载完成" << endl;
+		string FilePath = DownloadURL.substr(DownloadURL.rfind("/") + 1);
+		if (!PathFileExistsA(FilePath.c_str()))
+		{
+			cout << FilePath << "不存在，即将下载……" << endl;
+			//使用COM来下载，无需自己写，不过有弊端，不能实时查看下载进度，建议使用libcurl来改进下载
+			::CoInitialize(NULL);
+			::URLDownloadToFileA(NULL, DownloadURL.c_str(), FilePath.c_str(), 0, NULL);
+			::CoUninitialize();
+			if (PathFileExistsA(FilePath.c_str()))
+				cout << FilePath << "下载完成" << endl;
+			else
+				cout << FilePath << "下载失败" << endl;
+		}else
+			cout << FilePath << "已经存在，跳过……" << endl;
+	}else{
+		system("pause");
+		exit(1);
 	}
-	else
-		cout << FilePath << "已经存在" << endl;
 }
 
 //定义相应的转换函数
@@ -167,12 +166,12 @@ string URLCat(string MDURL, string ChapterURL, int MatchMode, int LMove)
 
 void DownloadAllResInHTML(string url, const char* JSONPath)
 {
+	const char* DiskFile = "temp.html";
 	Json::Value JSONRoot = JsonEx::GetValueByJSON(JSONPath);//得到过滤库里的JSON对象
-	//string HTMLContent = ReadTextInFile("下载网址.html");
+	//string HTMLContent = ReadTextInFile(DiskFile);
 	string HTMLContent = GeWebInfoEx(url);//支持三次断网重连
 	//cout << HTMLContent << endl;
 
-	const char* DiskFile = "temp.html";
 	if (!PathFileExistsA(DiskFile) && JSONRoot["DownLoadInfo"]["SaveDisk"].asBool())
 	{
 		CreateFileByBinary(HTMLContent, DiskFile);
@@ -195,13 +194,16 @@ void DownloadAllResInHTML(string url, const char* JSONPath)
 	NodeType ParentNodeInfo;
 	int ParentRunFlag = JsonValue2NodeType(JSONRoot["DownLoadInfo"]["ParentNodeInfo"],ParentNodeInfo);
 	std::vector<tree<HTML::Node>> ParentNodeArr = GetSubNodeByAuto(dom, ParentNodeInfo,ParentRunFlag);
+	//cout << ParentNodeArr.size() << endl;
 	if (ParentNodeArr.size() == 1)
 	{
+		//cout << ParentNodeArr[0] << endl;
 		//根据过滤条件找到子节点
 		NodeType SubNodeInfo;
 		int SubRunFlag = JsonValue2NodeType(JSONRoot["DownLoadInfo"]["SubNodeInfo"], SubNodeInfo);
 		std::vector<tree<HTML::Node>> SubNodeArr = GetSubNodeByAuto(ParentNodeArr[0], SubNodeInfo, SubRunFlag);
 
+		//cout << SubNodeArr.size() << endl;
 		size_t IsEnd = 0;
 		while (IsEnd<SubNodeArr.size()){
 			MyExtension::NodePropBase PropInfo;
@@ -211,9 +213,10 @@ void DownloadAllResInHTML(string url, const char* JSONPath)
 			bool IsShowData = JSONRoot["MatchURL"]["IsShowData"].asBool();
 
 			//仅仅对那些有有效的链接进行下载，通过后缀名进行识别
-			size_t RegIndex = DownloadURL.find("tar.xz");
+			bool IsDownload = JSONRoot["DownLoadInfo"]["IsDownload"].asBool();
+			size_t RegIndex = DownloadURL.find(JSONRoot["DownLoadInfo"]["FileExtensionName"].asString());
 			if (JSONRoot["DownLoadInfo"]["FileExtensionName"].isNull() || (RegIndex>0 && RegIndex<DownloadURL.length()))
-				LoadFileFromURL(DownloadURL, IsShowData);
+				LoadFileFromURL(DownloadURL, IsDownload, IsShowData);
 			IsEnd++;
 		}
 	}
@@ -228,8 +231,6 @@ void PrintHelp()
 	cout << "使用示例如下：" << endl;
 	cout << GetApplicationDir() << " -JSONPath:example.json -WebURL:https://ffmpeg.zeranoe.com/builds/" << endl;
 }
-
-
 
 
 //主函数
