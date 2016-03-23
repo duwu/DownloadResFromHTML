@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="字符串拓展">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="文件操作">
+      <UniqueIdentifier>{e4bfef1e-835c-45a1-b046-f1ddceb45334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HTMLCXX">
+      <UniqueIdentifier>{0ea39e7f-da87-47ea-bfb1-5379c6dfed10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HTMLCXX\src">
+      <UniqueIdentifier>{3546786a-3cc8-42e3-b309-4bcb8cc2ae35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HTMLCXX\头文件">
+      <UniqueIdentifier>{bb73318d-8643-49d0-9c5e-498f99ac2731}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JSONCPP">
+      <UniqueIdentifier>{a781a5b0-64bc-46ba-9b3b-d6452eca56f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JSONCPP\头文件">
+      <UniqueIdentifier>{11c4b949-0395-496d-adf2-3fab3c2f73a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JSONCPP\src">
+      <UniqueIdentifier>{fb839b65-0de6-423f-b231-6e6139989d1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="网络操作">
+      <UniqueIdentifier>{8db35fee-3b5f-4128-8315-37b7d0187b35}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="源.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="文件操作\FileOptionsEx.cpp">
+      <Filter>文件操作</Filter>
+    </ClCompile>
+    <ClCompile Include="字符串拓展\StringEx.cpp">
+      <Filter>字符串拓展</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLCXX\Extensions.cc">
+      <Filter>HTMLCXX\src</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLCXX\Node.cc">
+      <Filter>HTMLCXX\src</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLCXX\ParserDom.cc">
+      <Filter>HTMLCXX\src</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLCXX\ParserSax.cc">
+      <Filter>HTMLCXX\src</Filter>
+    </ClCompile>
+    <ClCompile Include="JSONCPP\json_reader.cpp">
+      <Filter>JSONCPP\src</Filter>
+    </ClCompile>
+    <ClCompile Include="JSONCPP\json_value.cpp">
+      <Filter>JSONCPP\src</Filter>
+    </ClCompile>
+    <ClCompile Include="JSONCPP\json_writer.cpp">
+      <Filter>JSONCPP\src</Filter>
+    </ClCompile>
+    <ClCompile Include="网络操作\WEBOptions.cpp">
+      <Filter>网络操作</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="文件操作\FileOptionsEx.h">
+      <Filter>文件操作</Filter>
+    </ClInclude>
+    <ClInclude Include="字符串拓展\StringEx.h">
+      <Filter>字符串拓展</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLCXX\Extensions.h">
+      <Filter>HTMLCXX\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLCXX\Node.h">
+      <Filter>HTMLCXX\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLCXX\ParserDom.h">
+      <Filter>HTMLCXX\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLCXX\ParserSax.h">
+      <Filter>HTMLCXX\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="JSONCPP\json.h">
+      <Filter>JSONCPP\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="JSONCPP\reader.h">
+      <Filter>JSONCPP\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="JSONCPP\value.h">
+      <Filter>JSONCPP\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="JSONCPP\writer.h">
+      <Filter>JSONCPP\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="网络操作\WEBOptions.h">
+      <Filter>网络操作</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
